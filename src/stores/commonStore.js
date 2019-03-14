@@ -3,34 +3,36 @@ import agent from '../agent';
 
 class CommonStore {
 
-  @observable appName = 'Conduit';
+  @observable appName = 'CRUD Clientes';
   @observable token = window.localStorage.getItem('jwt');
   @observable appLoaded = false;
 
-  @observable tags = [];
-  @observable isLoadingTags = false;
+  @observable clientes = [];
+  @observable isLoadingClientes = false;
 
   constructor() {
     reaction(
       () => this.token,
       token => {
         if (token) {
-          window.localStorage.setItem('jwt', token);
+          sessionStorage.setItem('jwt', token);
         } else {
-          window.localStorage.removeItem('jwt');
+          sessionStorage.removeItem('jwt');
         }
       }
     );
   }
 
-  @action loadTags() {
-    this.isLoadingTags = true;
-    return agent.Tags.getAll()
-      .then(action(({ tags }) => { this.tags = tags.map(t => t.toLowerCase()); }))
-      .finally(action(() => { this.isLoadingTags = false; }))
+  @action loadClientes() {
+    this.isLoadingClientes = true;
+    return agent.Clientes.getAll()
+    .then(action((response) => { this.clientes = response }))    
+    .finally(action(() => { this.isLoadingClientes = false; }))
+    
   }
 
   @action setToken(token) {
+    sessionStorage.setItem('jwt', token);
     this.token = token;
   }
 

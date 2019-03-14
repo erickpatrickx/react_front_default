@@ -1,40 +1,44 @@
 import Banner from './Banner';
-import MainView from './MainView';
 import React from 'react';
-import Tags from './Tags';
+import Clientes from './Clientes';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 @inject('commonStore')
 @withRouter
 @observer
 export default class Home extends React.Component {
   componentDidMount() {
-    this.props.commonStore.loadTags();
+   this.props.commonStore.loadClientes();
   }
 
   render() {
-    const { tags, token, appName } = this.props.commonStore;
+    const {clientes,token, appName } = this.props.commonStore;
     return (
       <div className="home-page">
 
-        <Banner token={token} appName={appName} />
+    <Banner token={token} appName={appName} />
 
         <div className="container page">
-          <div className="row">
-            <MainView />
 
-            <div className="col-md-3">
-              <div className="sidebar">
+        <div className="row">    
+          <div className="col-md-12">
+          <Link to="/cliente">
 
-                <p>Popular Tags</p>
+            <button className="btn btn btn-primary pull-xs-left px-2" type="button"  > Novo </button>
+            </Link>
+          </div>
+         </div> 
+          <br></br>
+          <div className="row">    
+          <div className="col-md-12 ">
 
-                <Tags
-                  tags={tags}
+          <Clientes
+                  clientes={clientes}
                 />
-
-              </div>
-            </div>
+               </div> 
           </div>
         </div>
 

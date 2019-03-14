@@ -1,7 +1,9 @@
 {
-  "name": "react-front-example",
+  "name": "react-mobx-realworld-example-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://react-mobx.realworld.io",
+  "license": "MIT",
   "devDependencies": {
     "custom-react-scripts": "0.2.0",
     "gh-pages": "^1.0.0"
@@ -16,7 +18,11 @@
     "query-string": "5.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-input-mask": "^2.0.4",
     "react-router-dom": "4.2.2",
+    "react-table": "^6.9.2",
+    "react-text-mask": "^5.4.3",
+    "react-via-cep": "^2.0.2",
     "superagent": "^3.6.0",
     "superagent-promise": "^1.1.0"
   },
@@ -28,5 +34,5 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "http://localhost:8080/"
+  "proxy": "http://localhost:8080"
 }

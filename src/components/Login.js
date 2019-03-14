@@ -17,7 +17,7 @@ export default class Login extends React.Component {
   handleSubmitForm = (e) => {
     e.preventDefault();
     this.props.authStore.login()
-      .then(() => this.props.history.replace('/'));
+    .then(() => this.props.history.replace('/home'));
   };
 
   render() {
@@ -29,7 +29,7 @@ export default class Login extends React.Component {
           <div className="row">
 
             <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Login</h1>
+              <h1 className="text-xs-center">Bem vindo</h1>
              
 
               <ListErrors errors={errors} />
@@ -38,7 +38,7 @@ export default class Login extends React.Component {
                 <fieldset>
 
                   <fieldset className="form-group">
-                    <input
+                    <input required
                       className="form-control form-control-lg"
                       placeholder="Usuario"
                       value={values.user}
@@ -47,7 +47,7 @@ export default class Login extends React.Component {
                   </fieldset>
 
                   <fieldset className="form-group">
-                    <input
+                    <input required
                       className="form-control form-control-lg"
                       type="password"
                       placeholder="Senha"
