@@ -37,16 +37,15 @@ class ClienteStore {
     this.inProgress = true;
     return this.loadCliente(this.id)
       .then(action((cliente) => {
-        if (!cliente) throw new Error('Can\'t load original article');
+        if (!cliente) throw new Error('Can\'t load original cliente');
         this.nome = cliente.nome;
         this.cpf = cliente.cpf;
-        this.cep= cliente.endereco.cep;
-        this.logradouro=cliente.endereco.logradouro;
-        this.bairro=cliente.endereco.bairro;
-        this.cidade=cliente.endereco.cidade;
-        this.uf=cliente.endereco.uf;
-        this.complemento=cliente.endereco.complemento;
-
+        this.endereco.cep= cliente.endereco.cep;
+        this.endereco.logradouro=cliente.endereco.logradouro;
+        this.endereco.bairro=cliente.endereco.bairro;
+        this.endereco.cidade=cliente.endereco.cidade;
+        this.endereco.uf=cliente.endereco.uf;
+        this.endereco.complemento=cliente.endereco.complemento;
         this.emailList = cliente.emails;
         this.telefoneList = cliente.telefones;
 
@@ -65,9 +64,6 @@ class ClienteStore {
     this.endereco.complemento=''
     this.emailList = [];
     this.telefoneList = [];
-
-
-
   }
 
   @action setNome(nome) {

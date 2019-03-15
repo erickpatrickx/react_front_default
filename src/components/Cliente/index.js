@@ -26,6 +26,8 @@ export default class Cliente extends React.Component {
 
   componentDidMount() {
     this.props.clienteStore.loadInitialData();
+  
+
   }
 
   componentDidUpdate(prevProps) {
@@ -116,12 +118,7 @@ export default class Cliente extends React.Component {
       errors,
       nome,
       cpf,
-      cep,
-      logradouro,
-      bairro,
-      cidade,
-      uf,
-      complemento,
+      endereco,
       emailList,
       telefoneList,
     } = this.props.clienteStore;
@@ -162,7 +159,7 @@ export default class Cliente extends React.Component {
                   <fieldset className="form-group ">
 
 
-                  <InputMask required placeholder="CEP" required disabled={inProgress} className="form-control col-lg-4"  mask="99.999-999"    value={cep}
+                  <InputMask required placeholder="CEP" required disabled={inProgress} className="form-control col-lg-4"  mask="99.999-999"    value={endereco.cep}
                       onChange={this.changeCep}
                       disabled={inProgress}>
                   </InputMask>
@@ -173,7 +170,7 @@ export default class Cliente extends React.Component {
                     <input required
                       className="form-control"
                       type="text"
-                      value={logradouro}
+                      value={endereco.logradouro}
                       required
                       onChange={this.changeLogradouro}
                       placeholder="Logradouro"
@@ -187,7 +184,7 @@ export default class Cliente extends React.Component {
                     <input  required
                       className="form-control"
                       type="text"
-                      value={bairro}
+                      value={endereco.bairro}
                       onChange={this.changeBairro}
                       placeholder="Bairro"
                       disabled={inProgress}
@@ -200,7 +197,7 @@ export default class Cliente extends React.Component {
                       className="form-control"
                       type="text"
                       placeholder="Cidade"
-                      value={cidade}
+                      value={endereco.cidade}
                       required
                       onChange={this.changeCidade}
                       disabled={inProgress}
@@ -213,7 +210,7 @@ export default class Cliente extends React.Component {
                       className="form-control col-lg-2"
                       type="text"
                       placeholder="UF"
-                      value={uf}
+                      value={endereco.uf}
                       onChange={this.changeUf}
                       disabled={inProgress}
                     >
@@ -227,7 +224,7 @@ export default class Cliente extends React.Component {
                   className="form-control"
                   type="text"
                   placeholder="Complemento"
-                  value={complemento}
+                  value={endereco.complemento}
                   onChange={this.changeComplemento}
                   disabled={inProgress}
                 />  
