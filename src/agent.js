@@ -48,7 +48,7 @@ const requests = {
       .post(`${API_ROOT}${url}`, body)
       .use(tokenPlugin)
       .end(handleErrors)
-      .then(responseBody).then(console.log(body)),
+      .then(responseBody),
 };
 
 const Auth = {
@@ -63,7 +63,11 @@ const Clientes = {
   create: cliente =>
   requests.post('/clientes/save', { cliente }),
   update: cliente =>
-  requests.post('/clientes/update', { cliente })
+  requests.put('/clientes/update', { cliente }),
+  del: id =>
+  requests.del(`/clientes/${id}`),
+  get: id =>
+  requests.get(`/clientes/${id}`),
 
 };
 

@@ -31,22 +31,28 @@ class ClienteStore {
       this.id = id;
     }
   }
-  /**
 
   @action loadInitialData() {
     if (!this.id) return Promise.resolve();
     this.inProgress = true;
-    return articlesStore.loadArticle(this.articleSlug, { acceptCached: true })
-      .then(action((article) => {
-        if (!article) throw new Error('Can\'t load original article');
-        this.title = article.title;
-        this.description = article.description;
-        this.body = article.body;
-        this.tagList = article.tagList;
+    return this.loadCliente(this.id)
+      .then(action((cliente) => {
+        if (!cliente) throw new Error('Can\'t load original article');
+        this.nome = cliente.nome;
+        this.cpf = cliente.cpf;
+        this.cep= cliente.endereco.cep;
+        this.logradouro=cliente.endereco.logradouro;
+        this.bairro=cliente.endereco.bairro;
+        this.cidade=cliente.endereco.cidade;
+        this.uf=cliente.endereco.uf;
+        this.complemento=cliente.endereco.complemento;
+
+        this.emailList = cliente.emails;
+        this.telefoneList = cliente.telefones;
+
       }))
       .finally(action(() => { this.inProgress = false; }));
   }
- */
 
   @action reset() {
     this.nome = '';
@@ -59,6 +65,8 @@ class ClienteStore {
     this.endereco.complemento=''
     this.emailList = [];
     this.telefoneList = [];
+
+
 
   }
 
@@ -126,8 +134,8 @@ class ClienteStore {
         complemento:this.endereco.complemento,
       },
       emails:this.emailList,
-      telefones:this.telefoneList
-      //slug: this.articleSlug,
+      telefones:this.telefoneList,
+      id: this.id,
     };
     return (this.id ? this.updateCliente(cliente) : this.createCliente(cliente))
       .catch(action((err) => {
@@ -156,10 +164,20 @@ class ClienteStore {
   }
 
   @action deleteCliente(id) {
-    this.articlesRegistry.delete(id);
     return agent.Clientes.del(id)
-      .catch(action(err => { this.loadArticles(); throw err; }));
+    .then(() => { })
+      .catch(action(err => { throw err; }));
   }
+
+  
+@action loadCliente(id) {
+  this.isLoading = true;
+  return agent.Clientes.get(id)
+    .then(action(({ cliente }) => {
+      return cliente;
+    }))
+    .finally(action(() => { this.isLoading = false; }));
+}
 
   
 }

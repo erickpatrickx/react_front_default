@@ -4,6 +4,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 
 @inject('authStore')
+@inject('commonStore')
 @withRouter
 @observer
 export default class Login extends React.Component {
@@ -17,7 +18,8 @@ export default class Login extends React.Component {
   handleSubmitForm = (e) => {
     e.preventDefault();
     this.props.authStore.login()
-    .then(() => this.props.history.replace('/home'));
+    .then(() => { 
+      this.props.history.replace('/home')});
   };
 
   render() {

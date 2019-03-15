@@ -7,11 +7,13 @@ import { Link } from 'react-router-dom';
 
 
 @inject('commonStore')
+@inject('clienteStore')
 @withRouter
 @observer
 export default class Home extends React.Component {
   componentDidMount() {
-   this.props.commonStore.loadClientes();
+          this.props.commonStore.loadClientes();
+
   }
 
   render() {
@@ -36,7 +38,7 @@ export default class Home extends React.Component {
           <div className="col-md-12 ">
 
           <Clientes
-                  clientes={clientes}
+                  clienteStore={this.props.clienteStore}
                 />
                </div> 
           </div>

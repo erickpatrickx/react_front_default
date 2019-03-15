@@ -32,7 +32,6 @@ class AuthStore {
       .then(({ user  }) => commonStore.setToken(user.token))
       .catch(action((err) => {
         this.errors = err.response && err.response.body && err.response.body.errors;
-        console.log(err.response);
         throw err;
       }))
       .finally(action(() => { this.inProgress = false; }));

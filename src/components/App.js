@@ -33,7 +33,7 @@ export default class App extends React.Component {
           <Switch>
             <PrivateRoute path="/home" component={Home} />
             <Route path="/cliente" component={Cliente} />
-
+            <Route path="/cliente/edit/" component={Cliente} />
             <Route path="/login" component={Login} />
             <Route path="/" component={Login} />
 

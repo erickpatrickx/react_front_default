@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactTable  from 'react-table';
 import LoadingSpinner from '../LoadingSpinner';
+import { inject, observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 import 'react-table/react-table.css';
 
-const Clientes = props => {
-  
-  const clientes = props.clientes;
-  if (clientes) {
+
+
+@inject("commonStore")
+@observer
+export default class Clientes extends React.Component {
+
+
+  render() {
+
+  if (this.props.commonStore.clientes) {
     return (
       <div>
         <ReactTable
-          data={clientes}
+          data={this.props.commonStore.clientes}
           columns={[
             {
               Header: "Código",
@@ -38,11 +46,21 @@ const Clientes = props => {
             },
            {
               Cell: row => (
+
                 <div>
-                    <button className="btn btn-primary btn-sm "  onClick={() => console.log('clicado')}>Edit</button> 
+                   
+                   <Link
+                      to={`/cliente/edit/?id=${row.original.cliente.id}`}>
+                          <button className="btn btn-primary btn-sm " >Edit</button> 
+                    </Link>
+        
                     <span> </span>
                     
-                    <button className="btn btn-danger btn-sm" onClick={() => console.log('clicado')}>Delete</button>
+                    <button className="btn btn-danger btn-sm" onClick={() => {
+                      this.props.clienteStore.deleteCliente(row.original.cliente.id);
+                      this.render();
+                    }
+                      }>Delete</button>
                 </div>
             )
 
@@ -68,5 +86,4 @@ const Clientes = props => {
     );
   }
 };
-
-export default Clientes;
+}

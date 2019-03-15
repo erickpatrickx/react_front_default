@@ -4,6 +4,8 @@ import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import MaskedInput from 'react-text-mask'
+import queryString from 'query-string';
+
 
 @inject('clienteStore')
 @withRouter
@@ -17,16 +19,17 @@ export default class Cliente extends React.Component {
   };
 
   componentWillMount() {
-    this.props.clienteStore.setId(this.props.match.params.id);
+    let url = this.props.location.search;
+    let params = queryString.parse(url);
+    this.props.clienteStore.setId(params["id"]);
   }
 
   componentDidMount() {
-    //this.props.clienteStore.loadInitialData();
+    this.props.clienteStore.loadInitialData();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-     // this.props.clienteStore.setArticleSlug(this.props.match.params.slug);
       this.props.clienteStore.loadInitialData();
     }
   }
