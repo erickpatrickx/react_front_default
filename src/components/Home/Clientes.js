@@ -12,6 +12,10 @@ import 'react-table/react-table.css';
 export default class Clientes extends React.Component {
 
 
+  handleRemoveItem = item => {
+    this.props.commonStore.removeItem(item);
+  };
+
   render() {
 
   if (this.props.commonStore.clientes) {
@@ -58,7 +62,8 @@ export default class Clientes extends React.Component {
                     
                     <button className="btn btn-danger btn-sm" onClick={() => {
                       this.props.clienteStore.deleteCliente(row.original.cliente.id);
-                      this.render();
+                     this.handleRemoveItem(row.original)
+                    
                     }
                       }>Delete</button>
                 </div>

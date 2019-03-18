@@ -9,8 +9,8 @@ class ListErrors extends React.Component {
           {
             Object.keys(errors).map(key => {
               return (
-                <li key={key}>
-                  {key} {errors[key]}
+                <li>
+                  {errors[key]}
                 </li>
               );
             })

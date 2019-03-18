@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import MaskedInput from 'react-text-mask'
 import queryString from 'query-string';
-
+import ViaCep from 'react-via-cep';
 
 @inject('clienteStore')
 @withRouter
@@ -15,7 +15,8 @@ export default class Cliente extends React.Component {
   state = {
     emailInput: '',
     numero: '',
-    tipoTelefone:''
+    tipoTelefone:'',
+    cep:'',
   };
 
   componentWillMount() {
@@ -27,7 +28,6 @@ export default class Cliente extends React.Component {
   componentDidMount() {
     this.props.clienteStore.loadInitialData();
   
-
   }
 
   componentDidUpdate(prevProps) {
@@ -94,8 +94,8 @@ export default class Cliente extends React.Component {
       this.setState({ tipoTelefone: '' });
     }
   };
-
-
+  
+  
   handleRemoveTelefone = telefone => {
     if (this.props.clienteStore.inProgress) return;
     this.props.clienteStore.removeTelefone(telefone);
@@ -112,6 +112,8 @@ export default class Cliente extends React.Component {
       });
   };
 
+
+
   render() {
     const {
       inProgress,
@@ -124,6 +126,9 @@ export default class Cliente extends React.Component {
     } = this.props.clienteStore;
 
     return (
+
+
+      
       <div className="editor-page">
         <div className="container page">
           <div className="row">
@@ -146,24 +151,18 @@ export default class Cliente extends React.Component {
                     />
                   </fieldset>
 
-
-
-              
-
                   <fieldset className="form-group">
 
 <                  InputMask placeholder="CPF" required disabled={inProgress} className="form-control col-lg-4"  mask="999.999.999-99" value={cpf} onChange={this.changeCpf}>
                   </InputMask>
 
                   </fieldset>
+
                   <fieldset className="form-group ">
-
-
                   <InputMask required placeholder="CEP" required disabled={inProgress} className="form-control col-lg-4"  mask="99.999-999"    value={endereco.cep}
                       onChange={this.changeCep}
                       disabled={inProgress}>
                   </InputMask>
-                
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -207,14 +206,41 @@ export default class Cliente extends React.Component {
                   <fieldset className="form-group">
 
                   <select  
-                      className="form-control col-lg-2"
+                      className="form-control col-lg-3"
                       type="text"
                       placeholder="UF"
+                      required
                       value={endereco.uf}
                       onChange={this.changeUf}
                       disabled={inProgress}
                     >
-                    <option value="" disabled selected>UF</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espirito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
                     </select>  
                   </fieldset>
 

@@ -40,6 +40,17 @@ class CommonStore {
     this.appLoaded = true;
   }
 
+  @action setClientes(clientes) {
+    this.clientes = clientes;
+  }
+  @action removeItem(item) {
+    this.clientes = this.clientes.filter(t => t.id !== item.id);
+  }
+
+
 }
+
+
+
 
 export default new CommonStore();

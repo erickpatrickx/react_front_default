@@ -66,6 +66,10 @@ class ClienteStore {
     this.telefoneList = [];
   }
 
+  @action alterEndereco(data) {
+    this.endereco.cep = data.cep;
+  }
+
   @action setNome(nome) {
     this.nome = nome;
   }
